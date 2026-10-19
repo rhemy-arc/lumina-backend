@@ -8,10 +8,14 @@
     "indexer",
     "shared"
   ],
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2"
+  },
   "scripts": {
-    "build": "npm run build:shared && npm run build:graphql && npm run build:indexer",
-    "build:graphql": "cd graphql-server && npm run build",
-    "build:indexer": "cd indexer && npm run build",
+    "build": "node init && npm run build:shared && npm run build:graphql && npm run build:indexer",
+    "build:graphql": "node init && cd graphql-server && npm run build",
+    "build:indexer": "node init && cd indexer && npm run build",
     "test": "npm run test:indexer && npm run test:graphql",
     "explain": "ts-node-transpile-only --project db/explain/tsconfig.json db/explain/run.ts capture",
     "explain:seed": "ts-node-transpile-only --project db/explain/tsconfig.json db/explain/run.ts seed",
@@ -21,7 +25,7 @@
     "test:graphql": "cd graphql-server && npm test",
     "manage-keys": "npm run --prefix graphql-server manage-keys --",
     "migrate": "npm run --prefix graphql-server migrate --",
-    "build:shared": "tsc -p shared/tsconfig.json"
+    "build:shared": "node init && tsc -p shared/tsconfig.json"
   },
   "engines": {
     "node": ">=18 <=22"
